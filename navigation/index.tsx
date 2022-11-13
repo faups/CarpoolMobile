@@ -21,6 +21,7 @@ import NotFoundScreen from "../screens/NotFoundScreen";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import CheckInScreen from "../screens/CheckInScreen";
+import CheckOutScreen from "../screens/CheckOutScreen";
 import GuestPickupScreen from "../screens/GuestPickup";
 import {
   RootStackParamList,
@@ -67,6 +68,11 @@ function RootNavigator() {
         name="CheckIn"
         component={CheckInScreen}
         options={{ title: "Guest Pickup" }}
+      />
+      <Stack.Screen
+        name="CheckOut"
+        component={CheckOutScreen}
+        options={{ title: "Check Out" }}
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />

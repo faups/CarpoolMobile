@@ -18,6 +18,7 @@ export type RootStackParamList = {
   Modal: undefined;
   NotFound: undefined;
   CheckIn: undefined;
+  CheckOut: undefined;
   Registration: undefined;
 };
 

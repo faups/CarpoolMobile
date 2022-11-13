@@ -12,6 +12,7 @@ import { useState, Component } from "react";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 import ModalDropdown from "react-native-modal-dropdown";
+import { NavigationHelpersContext } from "@react-navigation/native";
 
 export default function GuestPickupScreen({
   navigation,
@@ -57,7 +58,7 @@ export default function GuestPickupScreen({
             defaultValue={text}
           />
 
-          <Button title="Submit" onPress={() => "doSomething()"} />
+          <Button title="Submit" onPress={() => navigation.navigate('CheckOut')} />
 
           {/* Use a light status bar on iOS to account for the black space above the modal */}
           <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
