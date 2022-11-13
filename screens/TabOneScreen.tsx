@@ -4,12 +4,15 @@ import {
   TextInput,
   Button,
   KeyboardAvoidingView,
+  TouchableWithoutFeedback,
   Platform,
+  Keyboard,
   ScrollView,
 } from "react-native";
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { doc, setDoc, getFirestore } from "firebase/firestore";
 
+import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 
@@ -43,34 +46,26 @@ export default function TabOneScreen({
   const db = getFirestore(app);
 
   const submit = () => {
-    const docRef = addDoc(collection(db, "users"), {
+    const docRef = setDoc(doc(db, "users", pool), {
       parent,
       childrens,
       make,
       model,
       liscense,
-      pool,
+      id: parseInt(pool),
+      isCheckedIn: false,
+      pickupLocation: "Playground",
     });
-    setTextP("");
-    setTextC("");
-    setTextMake("");
-    setTextModel("");
-    setTextL("");
-    setTextPool("");
-    alert(`Success`);
-    setTimeout(function(){
-      navigation.navigate('TabTwo')
-    }, 5000);
+    alert(`User added successfully`);
   };
 
   return (
-    
+    <ScrollView style={{ flex: 1 }}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={130}
-        style={{ flex: 1, }}
+        style={{ flex: 1 }}
       >
-        <ScrollView style={styles.scrollView}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.container}>
             <Text style={styles.title}>Registration</Text>
             <View
@@ -154,8 +149,9 @@ export default function TabOneScreen({
               <Button title="Sign Up" onPress={submit} />
             </View>
           </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 
@@ -165,9 +161,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  scrollView: {
-    flex: 1
-  },
+  scrollView: {},
   title: {
     fontSize: 20,
     fontWeight: "bold",
