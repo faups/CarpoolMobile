@@ -10,7 +10,7 @@ import {
   ScrollView,
 } from "react-native";
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { doc, setDoc, getFirestore } from "firebase/firestore";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
@@ -46,21 +46,17 @@ export default function TabOneScreen({
   const db = getFirestore(app);
 
   const submit = () => {
-    const docRef = addDoc(collection(db, "users"), {
+    const docRef = setDoc(doc(db, "users", pool), {
       parent,
       childrens,
       make,
       model,
       liscense,
-      pool,
+      id: parseInt(pool),
+      isCheckedIn: false,
+      pickupLocation: "Playground",
     });
-    setTextP("");
-    setTextC("");
-    setTextMake("");
-    setTextModel("");
-    setTextL("");
-    setTextPool("");
-    alert(`Confirmation email has been sent to ${pool}`);
+    alert(`User added successfully`);
   };
 
   return (
