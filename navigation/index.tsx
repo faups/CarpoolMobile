@@ -21,7 +21,7 @@ import NotFoundScreen from "../screens/NotFoundScreen";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import CheckInScreen from "../screens/CheckInScreen";
-import HomeScreen from "../screens/GuestPickup";
+import GuestPickupScreen from "../screens/GuestPickup";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -115,10 +115,10 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={({ navigation }: RootTabScreenProps<"Home">) => ({
-          title: "Home",
+        name="GuestPickup"
+        component={GuestPickupScreen}
+        options={({ navigation }: RootTabScreenProps<"GuestPickup">) => ({
+          title: "Guest Pickup",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         })}
       />
