@@ -13,19 +13,19 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
   const [liscense, setTextL] = useState('');
   const [pool, setTextPool] = useState('');
 
-  // const childInput = useRef(null);
-  // const makeInput = useRef(null);
-  // const modelInput = useRef(null);
-  // const liscenseInput = useRef(null);
-  // const poolInput = useRef(null);
+  const childInput = useRef(null);
+  const makeInput = useRef(null);
+  const modelInput = useRef(null);
+  const liscenseInput = useRef(null);
+  const poolInput = useRef(null);
 
   const submit = () => {
     alert(`Confirmation email has been sent to ${pool}`);
   };
 
   return (
-    <View style={styles.container}>
-      {/* <ScrollView> */}
+    <ScrollView style={styles.scrollView}>
+      <View style={styles.container}>
         <Text style={styles.title}>Registration</Text>
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 
@@ -36,7 +36,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
           defaultValue={parent}
           autoFocus={true}
           returnKeyType="next"
-          // onSubmitEditing={() => childInput.current.focus()}
+          onSubmitEditing={() => childInput.current.focus()}
         />
 
         <Text style={styles.body}>Children Name(s):</Text>
@@ -44,7 +44,9 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
           placeholder="Full Name(s)"
           onChangeText={newText => setTextC(newText)}
           defaultValue={childrens}
-          // ref={childInput}
+          ref={childInput}
+          returnKeyType="next"
+          onSubmitEditing={() => makeInput.current.focus()}
         />
 
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
@@ -55,6 +57,9 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
           placeholder="EX: Ford/Hyundai/BMW"
           onChangeText={newText => setTextMake(newText)}
           defaultValue={make}
+          ref={makeInput}
+          returnKeyType="next"
+          onSubmitEditing={() => modelInput.current.focus()}
         />
         
         <Text style={styles.body}>Model:</Text>
@@ -62,25 +67,34 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
           placeholder="EX: Explorer/Sonata/X3"
           onChangeText={newText => setTextModel(newText)}
           defaultValue={model}
+          ref={modelInput}
+          returnKeyType="next"
+          onSubmitEditing={() => liscenseInput.current.focus()}
         />
         <Text style={styles.body}>Liscense Plate:</Text>
         <TextInput style={styles.input}
           placeholder="EX: WWW123"
           onChangeText={newText => setTextL(newText)}
           defaultValue={liscense}
+          ref={liscenseInput}
+          returnKeyType="next"
+          onSubmitEditing={() => poolInput.current.focus()}
         />
         <Text style={styles.body}>Carpool Number:</Text>
         <TextInput style={styles.input}
           placeholder="1234"
           onChangeText={newText => setTextPool(newText)}
           defaultValue={pool}
+          ref={poolInput}
+          returnKeyType="next"
+          onSubmitEditing={submit}
         />
 
         <View>
           <Button title="Sign Up" onPress={submit} />
         </View>
-      {/* </ScrollView> */}
-    </View>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -89,6 +103,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  scrollView: {
+    
   },
   title: {
     fontSize: 20,
