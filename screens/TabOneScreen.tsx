@@ -57,101 +57,103 @@ export default function TabOneScreen({
       pickupLocation: "Playground",
     });
     alert(`User added successfully`);
+    setTimeout(function(){
+      navigation.navigate('GuestPickup')
+    }, 5000);
   };
 
   return (
-    <ScrollView style={{ flex: 1 }}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ flex: 1 }}
-      >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.container}>
-            <Text style={styles.title}>Registration</Text>
-            <View
-              style={styles.separator}
-              lightColor="#eee"
-              darkColor="rgba(255,255,255,0.1)"
-            />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={130}
+      style={{ flex: 1, }}
+    >
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.container}>
+          <Text style={styles.title}>Registration</Text>
+          <View
+            style={styles.separator}
+            lightColor="#eee"
+            darkColor="rgba(255,255,255,0.1)"
+          />
 
-            <Text style={styles.body}>Parent Name:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Full Name"
-              onChangeText={(newText) => setTextP(newText)}
-              defaultValue={parent}
-              autoFocus={true}
-              returnKeyType="next"
-              onSubmitEditing={() => childInput.current.focus()}
-            />
+          <Text style={styles.body}>Parent Name:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Full Name"
+            onChangeText={(newText) => setTextP(newText)}
+            defaultValue={parent}
+            autoFocus={true}
+            returnKeyType="next"
+            onSubmitEditing={() => childInput.current.focus()}
+          />
 
-            <Text style={styles.body}>Children Name(s):</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Full Name(s)"
-              onChangeText={(newText) => setTextC(newText)}
-              defaultValue={childrens}
-              ref={childInput}
-              returnKeyType="next"
-              onSubmitEditing={() => makeInput.current.focus()}
-            />
+          <Text style={styles.body}>Children Name(s):</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Full Name(s)"
+            onChangeText={(newText) => setTextC(newText)}
+            defaultValue={childrens}
+            ref={childInput}
+            returnKeyType="next"
+            onSubmitEditing={() => makeInput.current.focus()}
+          />
 
-            <View
-              style={styles.separator}
-              lightColor="#eee"
-              darkColor="rgba(255,255,255,0.1)"
-            />
-            <Text style={styles.body}>Vehicle Info</Text>
+          <View
+            style={styles.separator}
+            lightColor="#eee"
+            darkColor="rgba(255,255,255,0.1)"
+          />
+          <Text style={styles.body}>Vehicle Info</Text>
 
-            <Text style={styles.body}>Make:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="EX: Ford/Hyundai/BMW"
-              onChangeText={(newText) => setTextMake(newText)}
-              defaultValue={make}
-              ref={makeInput}
-              returnKeyType="next"
-              onSubmitEditing={() => modelInput.current.focus()}
-            />
+          <Text style={styles.body}>Make:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="EX: Ford/Hyundai/BMW"
+            onChangeText={(newText) => setTextMake(newText)}
+            defaultValue={make}
+            ref={makeInput}
+            returnKeyType="next"
+            onSubmitEditing={() => modelInput.current.focus()}
+          />
 
-            <Text style={styles.body}>Model:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="EX: Explorer/Sonata/X3"
-              onChangeText={(newText) => setTextModel(newText)}
-              defaultValue={model}
-              ref={modelInput}
-              returnKeyType="next"
-              onSubmitEditing={() => liscenseInput.current.focus()}
-            />
-            <Text style={styles.body}>Liscense Plate:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="EX: WWW123"
-              onChangeText={(newText) => setTextL(newText)}
-              defaultValue={liscense}
-              ref={liscenseInput}
-              returnKeyType="next"
-              onSubmitEditing={() => poolInput.current.focus()}
-            />
-            <Text style={styles.body}>Carpool Number:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="1234"
-              onChangeText={(newText) => setTextPool(newText)}
-              defaultValue={pool}
-              ref={poolInput}
-              returnKeyType="next"
-              onSubmitEditing={submit}
-            />
+          <Text style={styles.body}>Model:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="EX: Explorer/Sonata/X3"
+            onChangeText={(newText) => setTextModel(newText)}
+            defaultValue={model}
+            ref={modelInput}
+            returnKeyType="next"
+            onSubmitEditing={() => liscenseInput.current.focus()}
+          />
+          <Text style={styles.body}>Liscense Plate:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="EX: WWW123"
+            onChangeText={(newText) => setTextL(newText)}
+            defaultValue={liscense}
+            ref={liscenseInput}
+            returnKeyType="next"
+            onSubmitEditing={() => poolInput.current.focus()}
+          />
+          <Text style={styles.body}>Carpool Number:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="1234"
+            onChangeText={(newText) => setTextPool(newText)}
+            defaultValue={pool}
+            ref={poolInput}
+            returnKeyType="next"
+            onSubmitEditing={submit}
+          />
 
-            <View>
-              <Button title="Sign Up" onPress={submit} />
-            </View>
+          <View>
+            <Button title="Sign Up" onPress={submit} />
           </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
-    </ScrollView>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -161,7 +163,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  scrollView: {},
+  scrollView: {
+    flex: 1,
+  },
   title: {
     fontSize: 20,
     fontWeight: "bold",
