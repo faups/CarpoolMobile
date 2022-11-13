@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useState, Component } from "react";
+import { initializeApp } from "firebase/app";
+import { doc, updateDoc, getFirestore } from "firebase/firestore";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 import ModalDropdown from "react-native-modal-dropdown";
@@ -17,7 +19,27 @@ import { NavigationHelpersContext } from "@react-navigation/native";
 export default function GuestPickupScreen({
   navigation,
 }: RootTabScreenProps<"GuestPickup">) {
-  const [text] = useState("");
+  const firebaseConfig = {
+    apiKey: "AIzaSyA37f8BDFALhLdLDPYasUpgSsop0-UyV8Q",
+    authDomain: "carpool-fullstack.firebaseapp.com",
+    projectId: "carpool-fullstack",
+    storageBucket: "carpool-fullstack.appspot.com",
+    messagingSenderId: "289458205081",
+    appId: "1:289458205081:web:007c8bdd52c52b10ebe308",
+    measurementId: "G-B6KW4JECHV",
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const submit = () => {
+    const updateStatus = updateDoc(doc(db, "users", text), {
+      isCheckedIn: true,
+    });
+    navigation.navigate("CheckOut");
+  };
+
+  const [text, setText] = useState("");
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -35,7 +57,7 @@ export default function GuestPickupScreen({
           <TextInput
             style={styles.input}
             placeholder="Carpool Number"
-            onChangeText={(newText) => newText}
+            onChangeText={(newText) => setText(newText)}
             defaultValue={text}
           />
           <Text style={styles.form}>Pickup Location:</Text>
@@ -50,15 +72,8 @@ export default function GuestPickupScreen({
             }}
             options={["Playground", "Art Wing"]}
           />
-          <Text style={styles.form}>Student Name:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Student Name"
-            onChangeText={(newText) => newText}
-            defaultValue={text}
-          />
 
-          <Button title="Submit" onPress={() => navigation.navigate('CheckOut')} />
+          <Button title="Submit" onPress={submit} />
 
           {/* Use a light status bar on iOS to account for the black space above the modal */}
           <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
