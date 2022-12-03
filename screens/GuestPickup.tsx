@@ -35,8 +35,15 @@ export default function GuestPickupScreen({
   const submit = () => {
     const updateStatus = updateDoc(doc(db, "users", text), {
       isCheckedIn: true,
-    });
-    navigation.navigate("CheckOut");
+    })
+      .then(() => {
+        navigation.navigate("CheckOut");
+      })
+      .catch((error) =>
+        alert(
+          "Invalid pickup number! Please use a number that has been registered."
+        )
+      );
   };
 
   const [text, setText] = useState("");
@@ -47,7 +54,7 @@ export default function GuestPickupScreen({
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          <Text style={styles.title}>Guest Pickup</Text>
+          <Text style={styles.title}>Pickup</Text>
           <View
             style={styles.separator}
             lightColor="#eee"
